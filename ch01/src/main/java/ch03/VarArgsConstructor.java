@@ -2,6 +2,7 @@ package ch03;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,9 +19,18 @@ public class VarArgsConstructor {
 
 		System.out.println(people);
 
-		Person[] peopleArray = people.toArray(Person[]::new);
-		
+		Person[] peopleArray = people.toArray(new IntFunction<Person[]>() {
+			@Override
+			public Person[] apply(int value) {
+				// TODO Auto-generated method stub
+				return new Person[value];
+			}
+		});
+
 		System.out.println(Arrays.toString(peopleArray));
 
+		Person[] peopleArray2 = people.toArray(Person[]::new);
+
+		System.out.println(Arrays.toString(peopleArray2));
 	}
 }
